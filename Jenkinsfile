@@ -2,25 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('InitEB') {
+        stage('Deploy') {
             steps {
                withAWS(credentials: 'credenciales-aws', region: 'eu-west-1') {
                   dir('eb'){
-                       sh 'eb init hello-eb -k clave-lucatic -p"Docker running on 64bit Amazon Linux 2" --region eu-west-1'
+                       sh 'eb deploy'
                   }
                }
             }
         }
-        stage('CreateEB') {
-            steps {
-                withAWS(credentials: 'credenciales-aws', region: 'eu-west-1') {
-                      dir('eb'){
-                         sh 'eb create hello-eb --elb-type application -c hello-eb -i t2.micro'
-                      }                     
-                }
-            }
-        }
-
     }
 }
 

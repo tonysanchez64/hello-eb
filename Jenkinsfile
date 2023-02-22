@@ -15,7 +15,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'credenciales-aws', region: 'eu-west-1') {
                       dir('eb'){
-                         sh 'eb create --elb-type application -c hello-eb -i t2.micro'
+                         sh 'eb create hello-eb --elb-type application -c hello-eb -i t2.micro'
                       }                     
                 }
             }
